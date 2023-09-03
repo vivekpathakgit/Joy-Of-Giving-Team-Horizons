@@ -1,0 +1,67 @@
+section{
+  text-align: center;
+}
+.cont{
+  display: inline-block;
+  width: 80%;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+@keyframes changeColor {
+    from {
+        /* background-color: rgb(255, 255, 211); */
+        /* background-color: rgb(250, 250, 141); */
+        background-color: rgb(255, 255, 188);
+        /* background-color: hsl(60, 92%, 86%); */
+        /* background-color: rgb(205, 250, 215); */
+    }
+  
+    to {
+        background-color: rgb(255, 255, 255);
+        /* background-color:  rgb(205, 250, 215); */
+    }
+  }
+  .vehAsign, .outToPick, .picked {
+    margin: 0.9%;
+    display: inline-block;
+    /* background-color: rgb(248, 253, 198);  */
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    animation-duration: 1s;
+    animation-name: changeColor;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    text-align: center;
+  }
+  .vA, .oTP, .pkd{
+    position: relative;
+    margin: auto;
+    top:30%;
+    width: 40%;
+    height: 40%;
+    border-radius: 50%;
+    /* background-color: rgb(19, 253, 144); */
+    background-color: rgb(245, 253, 19);
+  }
+
+  .proIni {
+    margin: 0.9%;
+    display: inline-block;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    text-align: center;
+    background-color: rgb(205, 250, 215);
+  }
+  .pI{
+    position: relative;
+    margin: auto;
+    top:30%;
+    width: 40%;
+    height: 40%;
+    border-radius: 50%;
+    /* background-color: rgb(19, 253, 144); */
+    background-color: rgb(19, 253, 144);
+  }
+  
