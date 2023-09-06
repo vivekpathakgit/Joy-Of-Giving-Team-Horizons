@@ -11,7 +11,7 @@ export default function DonateRoute() {
   useEffect(() => {
     const authCheck = async () => {
       const res = await axios.get("/api/v1/auth/donate-user");
-      if (res.data.ok) {
+      if (res?.data?.ok) {
         setOk(true);
       } else {
         setOk(false);

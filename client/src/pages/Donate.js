@@ -4,36 +4,50 @@ import { useAuth } from "../context/auth";
 import axios from "axios";
 import { routesData } from "../VehRouteData/vehRouteData";
 import { toast } from "react-toastify";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Donate = () => {
   // const [donateAddress, setDonateAddress] = useState("");
   // console.log(auth?.user?.address);
+  const [auth, setAuth] = useAuth();
+  const { address, locality, phone, email } = auth.user;
   const [type, setType] = useState("");
-  const [address, setAddress] = useState("");
-  const [locality, setLocality] = useState("");
-  const [auth] = useAuth();
-  setAddress(auth.address);
-  setLocality(auth.locality);
+  const [add, setAdd] = useState(address);
+  const [loc, setLoc] = useState(locality);
+  const navigate = useNavigate();
+  // console.log(typeof JSON.stringify(add));
+  // if (add != address) {
+  //   setAdd(address);
+  // }
+  // if (loc != locality) {
+  //   setLoc(locality);
+  // }
+  // console.log(locality);
+  // const vehical = routesData.filter((e) => {
+  //   return e.locality === locality;
+  // });
+  // console.log(vehical);
   const handleDonate = async (e) => {
     e.preventDefault();
-    const vehNo = routesData.filter((e) => {
-      return e.locality == locality;
+    const vehical = routesData.filter((e) => {
+      return e.locality === loc;
     });
+    const { vehNo } = vehical[0];
     try {
-      const { data } = await axios.post("/api/v1/donate/add-donate", {
-        type,
-        address,
-        locality,
-        phone: auth.phone,
-        email: auth.email,
+      const { data } = await axios.post("/api/v1/auth/add-donate", {
+        type: "food",
+        address: JSON.stringify(add),
+        locality: JSON.stringify(loc),
+        phone: phone,
+        email: email,
         vehNo: vehNo,
       });
+
       if (data?.success) {
         setTimeout(() => {
           toast.success(data.message);
         }, 1000);
-        Navigate("/profile");
+        navigate("/");
       } else {
         toast.error(data.message);
       }
@@ -52,20 +66,22 @@ const Donate = () => {
             className="form-select form-select-md mb-3"
             aria-label="Large select example"
             onChange={(e) => {
+              console.log(e);
+              console.log("changed", type);
               setType(e.value);
             }}
           >
-            <option selected>Open this select menu</option>
-            <option value={"food"}>Food</option>
-            <option value={"cloth"}>Cloth</option>
+            <option value={1}>Food</option>
+            <option value={2}>Cloth</option>
           </select>
+
           <div className="mb-3">
             <label className="form-label">Address : </label>
             <input
               type="text"
-              value={address}
+              value={add}
               onChange={(e) => {
-                setAddress(e.value);
+                setAdd(e.target.value);
               }}
               className="form-control"
             />
@@ -74,9 +90,9 @@ const Donate = () => {
             <label className="form-label">Locality : </label>
             <input
               type="text"
-              value={locality}
+              value={loc}
               onChange={(e) => {
-                setLocality(e.value);
+                setLoc(e.target.value);
               }}
               className="form-control"
             />

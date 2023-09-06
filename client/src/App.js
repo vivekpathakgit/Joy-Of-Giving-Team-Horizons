@@ -35,7 +35,7 @@ function App() {
           <Route path="admin/Benif/:slug" element={<UpdateBenif />} />
         </Route>
         <Route path="/donate" element={<DonateRoute />}>
-          <Route path="donate" element={<Donate />} />
+          <Route path="" element={<Donate />} />
         </Route>
         <Route path="/register" element={<Sign />} />
         <Route path="/login" element={<Login />} />

@@ -26,10 +26,6 @@ router.post("/login", loginController);
 
 //Trial
 //routes
-router.post("/add-donate", requireSignIn, isUser, donateController);
-
-//get donate
-router.get("/get-donate", requireSignIn, getDonateController);
 
 export default router;
 
@@ -49,3 +45,8 @@ router.get("/admin-auth", requireSignIn, isMainAdmin, (req, res) => {
 router.get("/donate-user", requireSignIn, isUser, (req, res) => {
   res.status(200).send({ ok: true });
 });
+
+router.post("/add-donate", requireSignIn, isUser, donateController);
+
+//get donate
+router.get("/get-donate", requireSignIn, getDonateController);

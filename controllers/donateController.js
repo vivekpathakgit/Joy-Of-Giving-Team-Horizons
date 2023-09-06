@@ -5,16 +5,7 @@ import fs from "fs";
 
 export const donateController = async (req, res) => {
   try {
-    const {
-      type,
-      address,
-      locality,
-      phone,
-      email,
-      vehNo,
-      outToPick,
-      pickupDone,
-    } = req.body;
+    const { type, address, locality, phone, email, vehNo } = req.body;
     if (!type) {
       return res.send({ message: "Type is required!" });
     }
@@ -32,13 +23,11 @@ export const donateController = async (req, res) => {
       phone,
       email,
       vehNo,
-      outToPick,
-      pickupDone,
     }).save();
 
     res.status(201).send({
       success: true,
-      message: "Benificiery registered successfully",
+      message: "Donation Initiated Successfully",
       users,
     });
   } catch (error) {
