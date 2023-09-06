@@ -17,6 +17,12 @@ const Header = () => {
       toast.success("Logout Successfully");
     }, 1000);
   };
+
+  const handleDonate = () => {
+    setTimeout(() => {
+      toast.error("You need to login First!");
+    }, 500);
+  };
   return (
     <nav
       className="navbar navbar-expand-lg bg-body-tertiary"
@@ -50,6 +56,11 @@ const Header = () => {
                 about
               </Link>
             </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/hire">
+                Hire
+              </Link>
+            </li>
             {!auth.user ? (
               <>
                 <li className="nav-item">
@@ -72,11 +83,46 @@ const Header = () => {
                 </li>
               </>
             )}
-            <li className="nav-item">
-              <Link className="nav-link" to="/Profile">
-                Profile
-              </Link>
-            </li>
+            {auth.user ? (
+              <li className="nav-item">
+                <Link
+                  className="nav-link"
+                  // to={`/Profile/${auth?.user?.role === 1 ? "delv" : "user"}`}
+                  to={`/Profile/${
+                    auth?.user?.role === 1
+                      ? "delv"
+                      : auth?.user?.role === 2
+                      ? "admin"
+                      : "user"
+                  }`}
+                >
+                  Profile
+                </Link>
+              </li>
+            ) : (
+              ""
+            )}
+            {auth.user ? (
+              auth.user.role === 0 ? (
+                <>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/donate">
+                      Donate
+                    </Link>
+                  </li>
+                </>
+              ) : (
+                ""
+              )
+            ) : (
+              <>
+                <li className="nav-item">
+                  <Link onClick={handleDonate} className="nav-link" to="/login">
+                    Donate
+                  </Link>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>

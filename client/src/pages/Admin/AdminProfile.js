@@ -1,17 +1,12 @@
 import React from "react";
-import "./profileScript";
-import "../../style/profileStyle.css";
 import Layout from "../../components/layouts/Layout";
 import { useAuth } from "../../context/auth";
-import { useCart } from "../../context/cart";
-
-const Profile = () => {
+const AdminProfile = () => {
   const [auth] = useAuth();
-  const [cart, setCart] = useCart();
   return (
-    <Layout title={"User Profile"}>
+    <Layout>
       <section style={{ backgroundColor: "#eee" }}>
-        <div className="cont">
+        <div className="container py-5">
           <div className="row">
             <div className="col-lg-4">
               <div className="card mb-4">
@@ -25,20 +20,15 @@ const Profile = () => {
                   <h5 className="my-3">John Smith</h5>
                   <p className="text-muted mb-4" />
                   <div style={{ fontSize: "large" }}>
-                    <span className="bonus">Bonus Points : </span>
+                    <span className="route">Route Number : </span>
                     <span
-                      className="text-primary me-1"
+                      className="routeNo text-primary me-1"
                       style={{ fontWeight: "bold" }}
                     >
-                      100
+                      5
                     </span>
                   </div>{" "}
                   <p />
-                  <div className="d-flex justify-content-center mb-2">
-                    <button type="button" className="btn btn-primary">
-                      Redeem
-                    </button>
-                  </div>
                 </div>
               </div>
               <div className="card mb-4 mb-lg-0">
@@ -129,110 +119,7 @@ const Profile = () => {
                   </div>
                 </div>
               </div>
-              <h4 className="text-center">
-                {cart?.length > 1
-                  ? `You brought joy to ${cart?.length} families`
-                  : ""}
-              </h4>
-              <div className="pickupData row">
-                {cart?.map((p) => (
-                  <div className="col-md-6 mb-3">
-                    <div className="card mb-4 mb-md-0">
-                      <div className="card-body">
-                        <p className=" mb-4">
-                          <span className="text-primary font-italic me-1">
-                            Donate{p.type}
-                          </span>
-                          Pickup Status
-                        </p>
-                        <p
-                          className="status mb-1"
-                          style={{ fontSize: ".77rem" }}
-                        >
-                          In Progress : 25%
-                        </p>
-                        <div className="progress rounded" style={{ height: 8 }}>
-                          <div
-                            className="progress-bar"
-                            role="progressbar"
-                            style={{ width: "25%" }}
-                            aria-valuenow={80}
-                            aria-valuemin={0}
-                            aria-valuemax={100}
-                          />
-                        </div>
-                        <div className="mt-4">
-                          <div
-                            style={{
-                              display: "flex",
-                              justifyContent: "flex-start",
-                            }}
-                          >
-                            <div className="proIni">
-                              <div className="pI" />
-                            </div>
-                            <div> Process Initiated</div>
-                          </div>
-                          <div
-                            style={{
-                              display: "flex",
-                              justifyContent: "flex-start",
-                            }}
-                          >
-                            <div
-                              className="vehAsign"
-                              style={{ animationDuration: "infinite" }}
-                            >
-                              <div className="vA" />
-                            </div>
-                            <div className="vehNum">
-                               Vehical Assigned : ${"{"}vehical{"}"}
-                            </div>
-                          </div>
-                          <div
-                            style={{
-                              display: "flex",
-                              justifyContent: "flex-start",
-                            }}
-                          >
-                            <div
-                              className="outToPick"
-                              style={{ animationDuration: "infinite" }}
-                            >
-                              <div className="oTP" />
-                            </div>
-                            <div> Out For Pickup</div>
-                          </div>
-                          <div
-                            style={{
-                              display: "flex",
-                              justifyContent: "flex-start",
-                            }}
-                          >
-                            <div
-                              className="picked"
-                              style={{ animationDuration: "infinite" }}
-                            >
-                              <div className="pkd" />
-                            </div>
-                            <div> Pickup Complete</div>
-                          </div>
-                        </div>
-                        <br />
-                        <div style={{ fontSize: "small" }}>
-                          <span className="bonus">Bonus Points : </span>
-                          <span
-                            className="text-primary me-1"
-                            style={{ fontWeight: "bold" }}
-                          >
-                            100
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              <div className="pickupData row"></div>
             </div>
           </div>
         </div>
@@ -241,4 +128,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default AdminProfile;

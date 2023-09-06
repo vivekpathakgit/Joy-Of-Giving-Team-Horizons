@@ -1,7 +1,10 @@
 import React from "react";
 import Layout from "../../components/layouts/Layout";
-
+import { useAuth } from "../../context/auth";
+import { useCart } from "../../context/cart";
 const DelevProfile = () => {
+  const [auth] = useAuth();
+  const [cart, setCart] = useCart();
   return (
     <Layout>
       <section style={{ backgroundColor: "#eee" }}>
@@ -77,7 +80,7 @@ const DelevProfile = () => {
                       <p className="mb-0">Full Name</p>
                     </div>
                     <div className="col-sm-9">
-                      <p className="text-muted mb-0">Johnatan Smith</p>
+                      <p className="text-muted mb-0">{auth?.user?.name}</p>
                     </div>
                   </div>
                   <hr />
@@ -86,7 +89,7 @@ const DelevProfile = () => {
                       <p className="mb-0">Email</p>
                     </div>
                     <div className="col-sm-9">
-                      <p className="text-muted mb-0">example@example.com</p>
+                      <p className="text-muted mb-0">{auth?.user?.email}</p>
                     </div>
                   </div>
                   <hr />
@@ -95,7 +98,7 @@ const DelevProfile = () => {
                       <p className="mb-0">Mobile</p>
                     </div>
                     <div className="col-sm-9">
-                      <p className="text-muted mb-0">(098) 765-4321</p>
+                      <p className="text-muted mb-0">{auth?.user?.phone}</p>
                     </div>
                   </div>
                   <hr />
@@ -104,7 +107,7 @@ const DelevProfile = () => {
                       <p className="mb-0">Locality</p>
                     </div>
                     <div className="col-sm-9">
-                      <p className="text-muted mb-0">Khandagiri</p>
+                      <p className="text-muted mb-0">{auth?.user?.locality}</p>
                     </div>
                   </div>
                   <hr />
@@ -113,14 +116,130 @@ const DelevProfile = () => {
                       <p className="mb-0">Address</p>
                     </div>
                     <div className="col-sm-9">
-                      <p className="text-muted mb-0">
-                        Near Reliance Mart, Kunti Apartment, H-309{" "}
-                      </p>
+                      <p className="text-muted mb-0">{auth?.user?.address}</p>
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="pickupData row"></div>
+              <h4 className="text-center">
+                {cart?.length > 1
+                  ? `You brought joy to ${cart?.length} families`
+                  : ""}
+              </h4>
+              <div className="pickupData row">
+                {cart?.map((p) => (
+                  <div className="col-md-6 mb-3">
+                    <div className="card mb-4 mb-md-0">
+                      <div className="card-body" id="${idd}">
+                        <p className=" mb-4">
+                          <span className="text-primary font-italic me-1">
+                            Pickup ${"{"}type{"}"}
+                          </span>{" "}
+                          Status
+                        </p>
+                        <p
+                          className="status mb-1"
+                          style={{ fontSize: ".77rem" }}
+                        >
+                          In Progress : 0%
+                        </p>
+                        <div className="progress rounded" style={{ height: 8 }}>
+                          <div
+                            className="progress-bar"
+                            role="progressbar"
+                            style={{ width: "0%" }}
+                            aria-valuenow={0}
+                            aria-valuemin={0}
+                            aria-valuemax={100}
+                          />
+                        </div>
+                        <br />
+                        <hr />
+                        <div className="row">
+                          <div className="col-sm-3">
+                            <p className="mb-0">Locality</p>
+                          </div>
+                          <div className="col-sm-9">
+                            <p className="text-muted mb-0">{p.locality}</p>
+                          </div>
+                        </div>
+                        <hr />
+                        <div className="row">
+                          <div className="col-sm-3">
+                            <p className="mb-0">Address</p>
+                          </div>
+                          <div className="col-sm-9">
+                            <p className="text-muted mb-0">{p.address}</p>
+                          </div>
+                        </div>
+                        <br />
+                        <div className="mt-4">
+                          <div className="row">
+                            <div className="col-sm-9">
+                              <div
+                                style={{
+                                  display: "flex",
+                                  justifyContent: "flex-start",
+                                }}
+                              >
+                                <div
+                                  className="outToPick"
+                                  style={{
+                                    backgroundColor: "#3b5998",
+                                    animationDuration: "infinite",
+                                  }}
+                                >
+                                  <div className="oTP" />
+                                </div>
+                                <div> Out For Pickup</div>
+                              </div>
+                            </div>
+                            <div className="col-sm-2">
+                              <button
+                                type="button"
+                                className="outTP btn btn-primary"
+                              >
+                                Done
+                              </button>
+                            </div>
+                          </div>
+                          <br />
+                          <div className="row">
+                            <div className="col-sm-9">
+                              <div
+                                style={{
+                                  display: "flex",
+                                  justifyContent: "flex-start",
+                                }}
+                              >
+                                <div
+                                  className="picked"
+                                  style={{
+                                    backgroundColor: "#3b5998",
+                                    animationDuration: "infinite",
+                                  }}
+                                >
+                                  <div className="pkd" />
+                                </div>
+                                <div> Pickup Complete</div>
+                              </div>
+                            </div>
+                            <div className="col-sm-2">
+                              <button
+                                type="button"
+                                className="pickComp btn btn-primary"
+                              >
+                                Done
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                        <br />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>

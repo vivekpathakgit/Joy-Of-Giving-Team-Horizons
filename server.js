@@ -4,6 +4,8 @@ import morgan from "morgan";
 import colors from "colors";
 import connectDB from "./config/db.js";
 import authRoute from "./routes/authRoute.js";
+import benifRoute from "./routes/benifRoute.js";
+import donateRoute from "./routes/donateRoute.js";
 import cors from "cors";
 
 // config dotenv
@@ -22,6 +24,8 @@ app.use(morgan("dev"));
 
 //routes
 app.use("/api/v1/auth", authRoute);
+app.use("/api/v1/benif", benifRoute);
+app.use("/api/v1/donate", donateRoute);
 
 //rest api
 app.get("/", (req, res) => {

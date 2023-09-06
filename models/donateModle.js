@@ -1,23 +1,8 @@
 import mongoose from "mongoose";
 
-const userSchema = new mongoose.Schema(
+const donateSchema = new mongoose.Schema(
   {
-    name: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    email: {
-      type: String,
-      required: true,
-      unique: true,
-    },
-    password: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    phone: {
+    type: {
       type: String,
       required: true,
     },
@@ -29,17 +14,28 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    role: {
-      type: Number,
-      default: 0,
+    phone: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      required: true,
     },
     vehNo: {
-      type: Number,
-      default: 0,
+      type: String,
+      required: true,
+    },
+    outToPick: {
+      type: Boolean,
+      default: false,
+    },
+    pickupDone: {
+      type: Boolean,
+      default: false,
     },
   },
   { timestamps: true }
 );
 
-export default mongoose.model("users", userSchema);
-// export default mongoose.model('DataBase Name', reference)
+export default mongoose.model("donateModle", donateSchema);

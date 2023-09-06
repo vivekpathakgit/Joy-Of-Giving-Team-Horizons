@@ -100,6 +100,7 @@ export const loginController = async (req, res) => {
         phone: user.phone,
         address: user.address,
         locality: user.locality,
+        role: user.role,
       },
       token,
     });
@@ -113,12 +114,21 @@ export const loginController = async (req, res) => {
   }
 };
 
-//test controller
-export const testController = (req, res) => {
+export const getAuthController = async (req, res) => {
   try {
-    res.send("Protected Route");
+    const users = await userModle.find({}).sort({ createdAt: -1 });
+    res.status(201).send({
+      success: true,
+      totalCount: users.length,
+      message: "Users",
+      users,
+    });
   } catch (error) {
     console.log(error);
-    res.send({ error });
+    res.status(500).send({
+      success: false,
+      error,
+      message: "error in getting benif",
+    });
   }
 };

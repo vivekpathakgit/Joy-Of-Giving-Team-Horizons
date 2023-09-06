@@ -17,11 +17,53 @@ export const requireSignIn = async (req, res, next) => {
 };
 
 //admin access
+export const isUser = async (req, res, next) => {
+  try {
+    const user = await userModle.findById(req.user._id);
+    if (user.role !== 0) {
+      return res.status(200).send({
+        success: false,
+        message: "unautharized access",
+      });
+    } else {
+      next();
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(401).send({
+      success: false,
+      error,
+      message: "error in admin middleware",
+    });
+  }
+};
+//admin access
 export const isAdmin = async (req, res, next) => {
   try {
     const user = await userModle.findById(req.user._id);
     if (user.role !== 1) {
-      return res.status(401).send({
+      return res.status(200).send({
+        success: false,
+        message: "unautharized access",
+      });
+    } else {
+      next();
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(401).send({
+      success: false,
+      error,
+      message: "error in admin middleware",
+    });
+  }
+};
+//Main admin access
+export const isMainAdmin = async (req, res, next) => {
+  try {
+    const user = await userModle.findById(req.user._id);
+    if (user.role !== 2) {
+      return res.status(200).send({
         success: false,
         message: "unautharized access",
       });
